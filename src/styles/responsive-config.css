@@ -1,0 +1,168 @@
+/* Global Responsive Configuration */
+
+/* Breakpoint System */
+:root {
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* Fluid Spacing System */
+:root {
+  --space-xs: clamp(0.25rem, 1vw, 0.5rem);
+  --space-sm: clamp(0.5rem, 2vw, 1rem);
+  --space-md: clamp(1rem, 3vw, 1.5rem);
+  --space-lg: clamp(1.5rem, 4vw, 2rem);
+  --space-xl: clamp(2rem, 5vw, 3rem);
+  --space-2xl: clamp(3rem, 6vw, 4rem);
+}
+
+/* Container Queries */
+.container-fluid {
+  width: 100%;
+  max-width: 100%;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+@media (min-width: 640px) {
+  .container-fluid {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-fluid {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-fluid {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-fluid {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container-fluid {
+    max-width: 1536px;
+  }
+}
+
+/* Responsive Typography Scale */
+.text-responsive-xs { font-size: clamp(0.75rem, 2vw, 0.875rem); }
+.text-responsive-sm { font-size: clamp(0.875rem, 2.5vw, 1rem); }
+.text-responsive-base { font-size: clamp(1rem, 3vw, 1.125rem); }
+.text-responsive-lg { font-size: clamp(1.125rem, 3.5vw, 1.25rem); }
+.text-responsive-xl { font-size: clamp(1.25rem, 4vw, 1.5rem); }
+.text-responsive-2xl { font-size: clamp(1.5rem, 5vw, 2rem); }
+.text-responsive-3xl { font-size: clamp(2rem, 6vw, 3rem); }
+.text-responsive-4xl { font-size: clamp(2.5rem, 7vw, 4rem); }
+.text-responsive-5xl { font-size: clamp(3rem, 8vw, 5rem); }
+
+/* Mobile-First Grid System */
+.grid-responsive-1 { grid-template-columns: 1fr; }
+.grid-responsive-2 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.grid-responsive-3 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.grid-responsive-4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+/* Responsive Spacing Utilities */
+.p-responsive { padding: var(--space-md); }
+.px-responsive { padding-left: var(--space-md); padding-right: var(--space-md); }
+.py-responsive { padding-top: var(--space-md); padding-bottom: var(--space-md); }
+.m-responsive { margin: var(--space-md); }
+.mx-responsive { margin-left: var(--space-md); margin-right: var(--space-md); }
+.my-responsive { margin-top: var(--space-md); margin-bottom: var(--space-md); }
+
+/* Touch-Friendly Interactive Elements */
+.btn-responsive {
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-sm) var(--space-md);
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  border-radius: clamp(0.5rem, 2vw, 1rem);
+}
+
+/* Responsive Modal System */
+.modal-responsive {
+  width: 100%;
+  max-width: min(90vw, 600px);
+  max-height: min(90vh, 800px);
+  margin: var(--space-md);
+  border-radius: clamp(1rem, 3vw, 1.5rem);
+}
+
+/* Responsive Card System */
+.card-responsive {
+  padding: var(--space-md);
+  border-radius: clamp(0.75rem, 2vw, 1.25rem);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Responsive Navigation */
+.nav-responsive {
+  padding: var(--space-sm) var(--space-md);
+  gap: var(--space-sm);
+}
+
+@media (min-width: 1024px) {
+  .nav-responsive {
+    gap: var(--space-lg);
+  }
+}
+
+/* Responsive Images */
+.img-responsive {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: clamp(0.5rem, 2vw, 1rem);
+}
+
+/* Responsive Animations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-responsive {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* High DPI Display Support */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-optimized {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .auto-dark {
+    background-color: #0f172a;
+    color: #f8fafc;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-friendly {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+}

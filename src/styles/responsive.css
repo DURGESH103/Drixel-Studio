@@ -1,0 +1,122 @@
+/* Mobile-First Responsive Utilities */
+
+/* Container Queries for Scalable Components */
+@container (max-width: 640px) {
+  .container-responsive {
+    padding: 1rem;
+  }
+}
+
+@container (min-width: 641px) {
+  .container-responsive {
+    padding: 2rem;
+  }
+}
+
+/* Fluid Typography */
+.fluid-text-xs { font-size: clamp(0.75rem, 2vw, 0.875rem); }
+.fluid-text-sm { font-size: clamp(0.875rem, 2.5vw, 1rem); }
+.fluid-text-base { font-size: clamp(1rem, 3vw, 1.125rem); }
+.fluid-text-lg { font-size: clamp(1.125rem, 3.5vw, 1.25rem); }
+.fluid-text-xl { font-size: clamp(1.25rem, 4vw, 1.5rem); }
+.fluid-text-2xl { font-size: clamp(1.5rem, 5vw, 2rem); }
+.fluid-text-3xl { font-size: clamp(2rem, 6vw, 3rem); }
+.fluid-text-4xl { font-size: clamp(2.5rem, 7vw, 4rem); }
+
+/* Responsive Spacing */
+.space-responsive > * + * {
+  margin-top: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+/* Touch-Friendly Interactive Elements */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Responsive Grid */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+/* Safe Area Insets for Mobile */
+.safe-area-padding {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .glass {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid white;
+  }
+  
+  .text-gradient {
+    background: white;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Focus Visible for Accessibility */
+.focus-visible:focus-visible {
+  outline: 2px solid #7C3AED;
+  outline-offset: 2px;
+}
+
+/* Responsive Images */
+.responsive-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(17, 24, 39, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    z-index: 50;
+  }
+}
+
+/* Responsive Modal */
+@media (max-width: 640px) {
+  .modal-responsive {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+    border-radius: 1rem;
+  }
+}
+
+@media (min-width: 641px) {
+  .modal-responsive {
+    margin: 2rem;
+    max-height: calc(100vh - 4rem);
+    border-radius: 1.5rem;
+  }
+}

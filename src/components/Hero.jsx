@@ -113,12 +113,12 @@ const Hero = () => {
     <motion.section
       ref={ref}
       style={{ y, opacity }}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden grain"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden grain safe-area-padding"
     >
       {/* Custom Cursor */}
       <div 
         ref={cursorRef}
-        className="fixed w-8 h-8 bg-gradient-to-r from-electric-purple to-neon-blue rounded-full pointer-events-none z-50 mix-blend-difference opacity-80"
+        className="fixed w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-electric-purple to-neon-blue rounded-full pointer-events-none z-50 mix-blend-difference opacity-80 hidden sm:block"
       />
       
       {/* Enhanced Animated Background */}
@@ -160,7 +160,7 @@ const Hero = () => {
           transition={{
             duration: 12,
             repeat: Infinity,
-            ease: 'sine.inOut',
+            ease: 'easeInOut',
           }}
         />
       </div>
@@ -186,7 +186,7 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        <h1 ref={textRef} className="text-6xl md:text-8xl font-bold mb-6 leading-tight" style={{ perspective: '1000px' }}>
+        <h1 ref={textRef} className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6 leading-tight" style={{ perspective: '1000px' }}>
           {'Designing Interfaces'.split('').map((char, i) => (
             <span key={i} className="hero-char inline-block" style={{ transformOrigin: '50% 100%' }}>
               {char === ' ' ? '\u00A0' : char}
@@ -202,11 +202,11 @@ const Hero = () => {
           </span>
         </h1>
 
-        <p className="hero-subtitle text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto min-h-[3rem]">
+        <p className="hero-subtitle text-lg sm:text-xl md:text-2xl text-gray-400 mb-8 sm:mb-12 max-w-3xl mx-auto min-h-[3rem] leading-relaxed">
           <span className="typewriter-text"></span>
         </p>
 
-        <div className="hero-buttons flex flex-wrap gap-6 justify-center">
+        <div className="hero-buttons flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
           <MagneticButton text="View My Work" primary />
           <MagneticButton text="Explore Branding" />
         </div>
@@ -216,7 +216,7 @@ const Hero = () => {
       <motion.div
         animate={{ y: [0, 15, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2"
       >
         <div className="w-6 h-12 border-2 border-white/40 rounded-full flex justify-center p-2 backdrop-blur-sm">
           <motion.div
@@ -277,7 +277,7 @@ const MagneticButton = ({ text, primary }) => {
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className={`relative px-8 py-4 rounded-full font-semibold overflow-hidden ${
+      className={`relative px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold overflow-hidden text-sm sm:text-base touch-target ${
         primary
           ? 'bg-gradient-to-r from-electric-purple to-neon-blue text-white'
           : 'glass text-white border border-white/20'

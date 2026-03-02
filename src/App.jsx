@@ -22,6 +22,8 @@ import Print from './pages/Print';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import './styles/index.css';
+import './styles/responsive.css';
+import './styles/responsive-config.css';
 
 gsap.registerPlugin(ScrollTrigger);
 

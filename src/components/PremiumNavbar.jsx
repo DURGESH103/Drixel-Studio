@@ -41,20 +41,20 @@ const PremiumNavbar = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5"
+      className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5 safe-area-padding"
     >
-      <div className="max-w-7xl mx-auto px-6 py-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold text-gradient cursor-pointer"
+            className="text-xl sm:text-2xl font-bold text-gradient cursor-pointer"
           >
             Durgesh Studio
           </motion.div>
 
           {/* Center Nav - Desktop */}
-          <div className="hidden lg:flex items-center gap-8" ref={dropdownRef}>
+          <div className="hidden lg:flex items-center gap-6 xl:gap-8" ref={dropdownRef}>
             <NavItem 
               label="Explore" 
               isActive={activeDropdown === 'explore'}
@@ -78,12 +78,12 @@ const PremiumNavbar = () => {
           </div>
 
           {/* Right Actions - Desktop */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/register')}
-              className="px-6 py-2 rounded-full text-white hover:text-gray-300 transition-colors"
+              className="px-4 xl:px-6 py-2 rounded-full text-white hover:text-gray-300 transition-colors text-sm xl:text-base touch-target"
             >
               Sign Up
             </motion.button>
@@ -91,7 +91,7 @@ const PremiumNavbar = () => {
               whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(124, 58, 237, 0.6)' }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/login')}
-              className="px-6 py-2 rounded-full bg-gradient-to-r from-electric-purple to-neon-blue text-white font-semibold"
+              className="px-4 xl:px-6 py-2 rounded-full bg-gradient-to-r from-electric-purple to-neon-blue text-white font-semibold text-sm xl:text-base touch-target"
               style={{ boxShadow: '0 0 20px rgba(124, 58, 237, 0.4)' }}
             >
               Log In
@@ -102,7 +102,8 @@ const PremiumNavbar = () => {
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5"
+            className="lg:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5 touch-target"
+            aria-label="Toggle menu"
           >
             <motion.span animate={{ rotate: mobileMenuOpen ? 45 : 0, y: mobileMenuOpen ? 8 : 0 }} className="w-6 h-0.5 bg-white" />
             <motion.span animate={{ opacity: mobileMenuOpen ? 0 : 1 }} className="w-6 h-0.5 bg-white" />
@@ -247,9 +248,9 @@ const MobileMenu = ({ onClose }) => {
       animate={{ x: 0 }}
       exit={{ x: '100%' }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="fixed inset-0 top-[73px] bg-space-black z-40 overflow-y-auto"
+      className="fixed inset-0 top-[65px] sm:top-[73px] bg-space-black z-40 overflow-y-auto safe-area-padding"
     >
-      <div className="p-6 space-y-4">
+      <div className="p-4 sm:p-6 space-y-4">
         {['Explore', 'Hire Talent', 'Get Hired', 'Community'].map((item, index) => (
           <motion.div
             key={item}
@@ -259,7 +260,7 @@ const MobileMenu = ({ onClose }) => {
           >
             <button
               onClick={() => setOpenSubmenu(openSubmenu === item ? null : item)}
-              className="w-full flex items-center justify-between text-xl font-medium text-white py-3"
+              className="w-full flex items-center justify-between text-lg sm:text-xl font-medium text-white py-3 touch-target"
             >
               {item}
               <motion.svg
@@ -285,8 +286,11 @@ const MobileMenu = ({ onClose }) => {
                     {exploreItems[1].items.map((subItem) => (
                       <button
                         key={subItem}
-                        onClick={() => window.location.href = `/${subItem.toLowerCase().replace(' ', '-')}`}
-                        className="block py-2 text-gray-400 hover:text-white transition-colors w-full text-left"
+                        onClick={() => {
+                          navigate(`/${subItem.toLowerCase().replace(' ', '-')}`);
+                          onClose();
+                        }}
+                        className="block py-2 text-gray-400 hover:text-white transition-colors w-full text-left touch-target"
                       >
                         {subItem}
                       </button>
@@ -300,14 +304,20 @@ const MobileMenu = ({ onClose }) => {
 
         <div className="pt-6 space-y-3">
           <button 
-            onClick={() => navigate('/register')}
-            className="w-full px-6 py-3 rounded-full glass text-white font-semibold"
+            onClick={() => {
+              navigate('/register');
+              onClose();
+            }}
+            className="w-full px-6 py-3 rounded-full glass text-white font-semibold touch-target"
           >
             Sign Up
           </button>
           <button 
-            onClick={() => navigate('/login')}
-            className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-electric-purple to-neon-blue text-white font-semibold"
+            onClick={() => {
+              navigate('/login');
+              onClose();
+            }}
+            className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-electric-purple to-neon-blue text-white font-semibold touch-target"
           >
             Log In
           </button>
