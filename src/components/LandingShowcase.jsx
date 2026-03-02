@@ -1,5 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const landingPages = [
   {
@@ -30,45 +34,110 @@ const landingPages = [
 
 const LandingShowcase = () => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const containerRef = useRef(null);
+  const gridRef = useRef(null);
+  const titleRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Enhanced title animation with 3D effect
+      gsap.fromTo('.landing-title-char', 
+        { y: 100, opacity: 0, rotateX: -90, z: -100 },
+        { 
+          y: 0, 
+          opacity: 1, 
+          rotateX: 0, 
+          z: 0,
+          duration: 1.2, 
+          stagger: 0.08, 
+          ease: 'back.out(1.7)',
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+
+      // Enhanced grid animation
+      ScrollTrigger.create({
+        trigger: gridRef.current,
+        start: 'top 70%',
+        onEnter: () => {
+          gsap.fromTo('.landing-card', 
+            { 
+              y: 120, 
+              opacity: 0, 
+              scale: 0.8,
+              rotateY: -25
+            },
+            { 
+              y: 0, 
+              opacity: 1, 
+              scale: 1,
+              rotateY: 0,
+              duration: 1.5, 
+              stagger: 0.15,
+              ease: 'elastic.out(1, 0.8)'
+            }
+          );
+        }
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="landing-pages" className="py-32 px-6 relative">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <h2 className="text-5xl md:text-7xl font-bold mb-6">
-            Landing <span className="text-gradient">Pages</span>
+    <section ref={containerRef} id="landing-pages" className="py-32 px-6 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div ref={titleRef} className="text-center mb-20">
+          <h2 className="text-5xl md:text-7xl font-bold mb-6 overflow-hidden">
+            {'Landing Pages'.split('').map((char, i) => (
+              <span key={i} className="landing-title-char inline-block">
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            ))}
+            <br />
+            <span className="text-gradient">
+              {'That Convert'.split('').map((char, i) => (
+                <span key={i} className="landing-title-char inline-block">
+                  {char === ' ' ? '\u00A0' : char}
+                </span>
+              ))}
+            </span>
           </h2>
-          <p className="text-xl text-gray-400">
-            High-converting pages that tell compelling stories
-          </p>
-        </motion.div>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-xl text-gray-400 max-w-2xl mx-auto"
+          >
+            High-converting pages that tell compelling stories and drive results
+          </motion.p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {landingPages.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
+              className="landing-card glass rounded-2xl overflow-hidden cursor-pointer group"
+              whileHover={{ y: -10, scale: 1.02 }}
               onClick={() => setSelectedProject(project)}
-              className="glass rounded-2xl overflow-hidden cursor-pointer group glow-border"
             >
               <div className="relative h-64 overflow-hidden">
                 <motion.img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
+                  whileHover={{ scale: 1.15 }}
+                  transition={{ duration: 0.8 }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 bg-black/60 backdrop-blur-sm rounded-full text-xs font-medium">
+                    {project.category || 'Web Design'}
+                  </span>
+                </div>
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
