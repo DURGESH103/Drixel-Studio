@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const exploreItems = [
   { section: 'Featured', items: ['Popular', 'New and Noteworthy'] },
@@ -13,6 +14,7 @@ const PremiumNavbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -80,6 +82,7 @@ const PremiumNavbar = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/register')}
               className="px-6 py-2 rounded-full text-white hover:text-gray-300 transition-colors"
             >
               Sign Up
@@ -87,6 +90,7 @@ const PremiumNavbar = () => {
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(124, 58, 237, 0.6)' }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/login')}
               className="px-6 py-2 rounded-full bg-gradient-to-r from-electric-purple to-neon-blue text-white font-semibold"
               style={{ boxShadow: '0 0 20px rgba(124, 58, 237, 0.4)' }}
             >
@@ -235,6 +239,7 @@ const ExploreDropdown = ({ onClose }) => {
 
 const MobileMenu = ({ onClose }) => {
   const [openSubmenu, setOpenSubmenu] = useState(null);
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -294,10 +299,16 @@ const MobileMenu = ({ onClose }) => {
         ))}
 
         <div className="pt-6 space-y-3">
-          <button className="w-full px-6 py-3 rounded-full glass text-white font-semibold">
+          <button 
+            onClick={() => navigate('/register')}
+            className="w-full px-6 py-3 rounded-full glass text-white font-semibold"
+          >
             Sign Up
           </button>
-          <button className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-electric-purple to-neon-blue text-white font-semibold">
+          <button 
+            onClick={() => navigate('/login')}
+            className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-electric-purple to-neon-blue text-white font-semibold"
+          >
             Log In
           </button>
         </div>

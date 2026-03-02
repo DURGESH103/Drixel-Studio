@@ -19,6 +19,8 @@ import Illustration from './pages/Illustration';
 import Mobile from './pages/Mobile';
 import Typography from './pages/Typography';
 import Print from './pages/Print';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import './styles/index.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -79,6 +81,8 @@ function App() {
           <Route path="/mobile" element={<Mobile />} />
           <Route path="/typography" element={<Typography />} />
           <Route path="/print" element={<Print />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
     </Router>
