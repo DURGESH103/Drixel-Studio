@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PremiumNavbar from './components/PremiumNavbar';
 import Hero from './components/Hero';
 import WorkGrid from './components/WorkGrid';
@@ -10,6 +11,14 @@ import LandingShowcase from './components/LandingShowcase';
 import MotionShowcase from './components/MotionShowcase';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
+import ProductDesign from './pages/ProductDesign';
+import WebDesign from './pages/WebDesign';
+import Animation from './pages/Animation';
+import Branding from './pages/Branding';
+import Illustration from './pages/Illustration';
+import Mobile from './pages/Mobile';
+import Typography from './pages/Typography';
+import Print from './pages/Print';
 import './styles/index.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -47,16 +56,32 @@ function App() {
   }, []);
 
   return (
-    <div className="relative">
-      <CustomCursor />
-      <PremiumNavbar />
-      <Hero />
-      <WorkGrid />
-      <BrandingShowcase />
-      <LandingShowcase />
-      <MotionShowcase />
-      <Footer />
-    </div>
+    <Router>
+      <div className="relative">
+        <CustomCursor />
+        <PremiumNavbar />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Hero />
+              <WorkGrid />
+              <BrandingShowcase />
+              <LandingShowcase />
+              <MotionShowcase />
+              <Footer />
+            </>
+          } />
+          <Route path="/product-design" element={<ProductDesign />} />
+          <Route path="/web-design" element={<WebDesign />} />
+          <Route path="/animation" element={<Animation />} />
+          <Route path="/branding" element={<Branding />} />
+          <Route path="/illustration" element={<Illustration />} />
+          <Route path="/mobile" element={<Mobile />} />
+          <Route path="/typography" element={<Typography />} />
+          <Route path="/print" element={<Print />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

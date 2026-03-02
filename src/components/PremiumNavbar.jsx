@@ -201,14 +201,17 @@ const ExploreDropdown = ({ onClose }) => {
             <p className="text-xs text-gray-500 uppercase tracking-wider mb-3">{section.section}</p>
             <div className="grid grid-cols-2 gap-2 mb-4">
               {section.items.map((item, index) => (
-                <motion.a
+                <motion.button
                   key={item}
-                  href="#"
+                  onClick={() => {
+                    window.location.href = `/${item.toLowerCase().replace(' ', '-')}`;
+                    onClose();
+                  }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: (sectionIndex * section.items.length + index) * 0.03 }}
                   whileHover={{ x: 5, backgroundColor: 'rgba(124, 58, 237, 0.1)' }}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-white hover:text-electric-purple transition-colors hover:bg-white/10"
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-white hover:text-electric-purple transition-colors hover:bg-white/10 w-full text-left"
                 >
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-electric-purple/20 to-neon-blue/20 flex items-center justify-center">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -217,7 +220,7 @@ const ExploreDropdown = ({ onClose }) => {
                     </svg>
                   </div>
                   <span className="text-sm font-medium">{item}</span>
-                </motion.a>
+                </motion.button>
               ))}
             </div>
             {sectionIndex < exploreItems.length - 1 && (
@@ -275,13 +278,13 @@ const MobileMenu = ({ onClose }) => {
                 >
                   <div className="pl-4 pt-2 space-y-2">
                     {exploreItems[1].items.map((subItem) => (
-                      <a
+                      <button
                         key={subItem}
-                        href="#"
-                        className="block py-2 text-gray-400 hover:text-white transition-colors"
+                        onClick={() => window.location.href = `/${subItem.toLowerCase().replace(' ', '-')}`}
+                        className="block py-2 text-gray-400 hover:text-white transition-colors w-full text-left"
                       >
                         {subItem}
-                      </a>
+                      </button>
                     ))}
                   </div>
                 </motion.div>
