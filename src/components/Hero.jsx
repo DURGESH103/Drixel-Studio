@@ -160,7 +160,7 @@ const Hero = () => {
           transition={{
             duration: 12,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: 'sine.inOut',
           }}
         />
       </div>

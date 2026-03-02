@@ -130,7 +130,7 @@ const WorkGrid = () => {
         rotation: 180,
         scale: 1.2,
         duration: 10,
-        ease: 'power2.inOut',
+        ease: 'sine.inOut',
         yoyo: true,
         repeat: -1,
         stagger: 1.5

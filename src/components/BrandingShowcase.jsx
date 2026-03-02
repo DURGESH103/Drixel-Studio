@@ -147,7 +147,7 @@ const BrandingShowcase = () => {
         rotation: 360,
         scale: 1.1,
         duration: 8,
-        ease: 'power2.inOut',
+        ease: 'sine.inOut',
         yoyo: true,
         repeat: -1,
         stagger: {
